@@ -1,8 +1,6 @@
-package DZ3;
+package ru.otus.java.basic.homework3;
 
-import java.util.Arrays;
-
-public class dz3 {
+public class HomeWork3 {
     public static void main(String[] args) {
         int[][] arr = {{2, 3, 6, 7, 4}, {3, 4, 6, 7, 8}, {2, 7, 5, 3, 1}, {4, 5, 7, 1, 2}, {3, 4, 7, 1, 3}};
         sumOfPositiveElements(new int[][]{{2, -3, 6, 7, -4}, {3, -4, 6, -7, 8}, {2, -7, 5, 3, -1}, {4, -5, 7, 1, -2}});
@@ -80,12 +78,11 @@ public class dz3 {
 
     public static void sumSecondLine(int[][] arr) {
         int sum = 0;
+        if (arr.length < 2) {
+            System.out.println("-1");
+        }
         for (int i = 0; i <= arr.length; i++) {
-            if (arr.length >= 2) {
-                sum += arr[1][i];
-            } else {
-                System.out.println("-1");
-            }
+            sum += arr[1][i];
         }
         System.out.println(sum);
     }
