@@ -1,8 +1,8 @@
-package DZ2;
+package homework2;
 
 import java.util.Arrays;
 
-public class dz2 {
+public class HomeWork2 {
     public static void main(String[] args) {
         int[] arr = {1, 7, 4, 6, 7};
         int[] arr1 = {1, 7, 4, 6, 7};
@@ -73,10 +73,18 @@ public class dz2 {
     }
 
     public static void sumArray(int[] arr, int[] arr1, int[] arr2) {
-        int[] result = new int[arr2.length];
-        int[] copyArr = Arrays.copyOf(arr, arr2.length);
-        int[] copyArr1 = Arrays.copyOf(arr1, arr2.length);
-        for (int i = 0; i < arr2.length; i++) {
+        int n = 0;
+        if (arr.length > arr1.length & arr.length > arr2.length) {
+            n = arr.length;
+        } else if (arr1.length > arr2.length) {
+            n = arr1.length;
+        } else {
+            n = arr2.length;
+        }
+        int[] result = new int[n];
+        int[] copyArr = Arrays.copyOf(arr, n);
+        int[] copyArr1 = Arrays.copyOf(arr1, n);
+        for (int i = 0; i < n; i++) {
             result[i] = copyArr[i] + copyArr1[i] + arr2[i];
         }
         System.out.println(Arrays.toString(result));
