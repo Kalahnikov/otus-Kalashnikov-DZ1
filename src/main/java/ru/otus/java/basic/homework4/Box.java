@@ -5,8 +5,8 @@ public class Box {
     private int height;
     private int lenght;
     private String color;
-    boolean isOpen;
-    String object;
+    private boolean isOpen;
+    private String object;
 
     public void setColor(String color) {
         this.color = color;
@@ -31,12 +31,16 @@ public class Box {
     public void open() {
         if (isOpen) {
             System.out.println("Коробка открыта");
+        } else{
+            isOpen = true;
         }
     }
 
     public void close() {
         if (!isOpen) {
             System.out.println("Коробка закрыта");
+        } else {
+            isOpen = false;
         }
     }
 
