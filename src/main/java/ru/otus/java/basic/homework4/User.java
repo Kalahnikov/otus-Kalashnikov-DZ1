@@ -11,7 +11,7 @@ public class User {
         return yearOfBirth;
     }
 
-    public User(String surname, String name, String patronymic, int yearOfBirth, String email){
+    public User(String surname, String name, String patronymic, int yearOfBirth, String email) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
@@ -19,7 +19,7 @@ public class User {
         this.email = email;
     }
 
-    public void info(){
+    public void info() {
         System.out.println("ФИО: " + surname + " " + name + " " + patronymic);
         System.out.println("Год рождения: " + yearOfBirth);
         System.out.println("Email: " + email);

@@ -31,7 +31,7 @@ public class Box {
     public void open() {
         if (isOpen) {
             System.out.println("Коробка открыта");
-        } else{
+        } else {
             isOpen = true;
         }
     }

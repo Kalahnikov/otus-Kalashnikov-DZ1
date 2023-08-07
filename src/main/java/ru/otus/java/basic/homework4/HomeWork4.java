@@ -14,6 +14,7 @@ public class HomeWork4 {
                 new User("Сахаров", "Никита", "Никитович", 1973, "p@mail.ru"),
                 new User("Васюрин", "Константин", "Константинович", 1998, "a@mail.ru")
         };
+
         for (int i = 0; i < users.length; i++) {
             if ((2023 - users[i].getYearOfBirth() > 40)) {
                 users[i].info();
