@@ -11,8 +11,7 @@ public class Cat {
     }
 
     public void eat(Plate plate) {
-        plate.setCurrentFood(plate.getCurrentFood() - appetite);
-        if (plate.getCurrentFood() > 0) {
+        if(plate.decreaseFood(appetite)){
             System.out.println(name + " съел " + appetite + " единиц корма");
             satiety = true;
         } else {

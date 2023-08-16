@@ -17,6 +17,7 @@ public class CatFoodAplication {
             Cat.eat(plate);
             Cat.catInfo();
         }
+        System.out.println(plate);
     }
 }
 

@@ -26,16 +26,15 @@ public class Plate {
     }
 
     public boolean decreaseFood(int amount) {
-        currentFood -= amount;
-        if (currentFood >= 0) {
-            return true;
-        } else {
+        if (currentFood < amount) {
             return false;
         }
+        currentFood -= amount;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Тарелка с кол-вом еды: " + maxFood;
+        return "Тарелка с кол-вом еды: " + currentFood;
     }
 }
