@@ -2,7 +2,7 @@ package ru.otus.java.basic.dz1.homework7;
 
 public class Car implements Movement {
     private int patrol;
-    private Terrain[] impassable = {Terrain.FOREST, Terrain.SWAMP};
+    private static Terrain[] impassable = {Terrain.FOREST, Terrain.SWAMP};
     private int wastePatrol;
 
     public Car(int patrol, int wastePatrol) {
@@ -11,8 +11,10 @@ public class Car implements Movement {
     }
 
     public boolean choosingLocation(Terrain terrain) {
-        for (int i = 0; i < impassable.length ; i++) {
-            return false;
+        for (int i = 0; i < impassable.length; i++) {
+            if (impassable[i].equals(terrain)) {
+                return false;
+            }
         }
         return true;
     }
@@ -20,11 +22,12 @@ public class Car implements Movement {
     @Override
     public boolean move(int distance, Terrain terrain) {
         if (choosingLocation(terrain)) {
-            System.out.println("Дистанция не пройдена");
+            System.out.println("Дистанция не пройдена, автомобиль не может пройти по данной местности");
             return false;
         }
         if (distance < patrol / wastePatrol) {
-            System.out.println("Дистанция пройдена");
+            patrol = distance * wastePatrol;
+            System.out.println("Дистанция пройдена и на нее затрачено " + patrol + " единиц топлива");
             return true;
         } else {
             System.out.println("Дистанция не пройдена");

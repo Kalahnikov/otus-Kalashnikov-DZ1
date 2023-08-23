@@ -11,11 +11,12 @@ public class Jeep implements Movement {
 
     @Override
     public boolean move(int distance, Terrain terrain) {
-        if (distance > patrol / wastePatrol) {
-            System.out.println("Дистанция пройдена");
+        if (distance < patrol / wastePatrol) {
+            patrol = distance * wastePatrol;
+            System.out.println("Дистанция пройдена и на нее затрачено " + patrol + " единиц топлива");
             return true;
         } else {
-            System.out.println("Дистанция не пройдена");
+            System.out.println("Дистанция не пройдена, топлива не хватило");
             return false;
         }
     }

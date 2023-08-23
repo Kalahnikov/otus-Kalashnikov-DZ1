@@ -5,9 +5,8 @@ public class Human {
     private Movement currentTransport;
     private Terrain terrain;
 
-    public Human(String name, Movement currentTransport, Terrain terrain) {
+    public Human(String name, Terrain terrain) {
         this.name = name;
-        this.currentTransport = currentTransport;
         this.terrain = terrain;
     }
 
@@ -17,8 +16,17 @@ public class Human {
 
 
     public void sitInTransport(Movement currentTransport) {
-        if (currentTransport == this.currentTransport) {
+        if (this.currentTransport == null || currentTransport == this.currentTransport) {
+            this.currentTransport = currentTransport;
             this.currentTransport.sitIn();
+        }
+        if (currentTransport != this.currentTransport) {
+            this.currentTransport.exit();
+            this.currentTransport = currentTransport;
+            this.currentTransport.sitIn();
+        }
+        if (currentTransport == null) {
+            return;
         }
     }
 

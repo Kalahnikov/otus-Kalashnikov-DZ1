@@ -3,7 +3,7 @@ package ru.otus.java.basic.dz1.homework7;
 public class Horse implements Movement {
     private int power;
     private int wastePower;
-    private Terrain[] impassable = {Terrain.SWAMP};
+    private static Terrain[] impassable = {Terrain.SWAMP};
 
     public Horse(int power, int wastePower) {
         this.power = power;
@@ -12,7 +12,9 @@ public class Horse implements Movement {
 
     public boolean choosingLocation(Terrain terrain) {
         for (int i = 0; i < impassable.length; i++) {
-            return false;
+            if (impassable[i].equals(terrain)) {
+                return false;
+            }
         }
         return true;
     }
@@ -20,14 +22,15 @@ public class Horse implements Movement {
     @Override
     public boolean move(int distance, Terrain terrain) {
         if (choosingLocation(terrain)) {
-            System.out.println("Дистанция не пройдена");
+            System.out.println("Дистанция не пройдена, лошадь не может пройти по данной местности");
             return false;
         }
-        if (distance > power / wastePower) {
-            System.out.println("Дистанция пройдена");
+        if (distance < power / wastePower) {
+            power = distance * wastePower;
+            System.out.println("Дистанция пройдена. Лошадь потратила " + power + " единиц своих сил");
             return true;
         } else {
-            System.out.println("Дистанция не пройдена");
+            System.out.println("Дистанция не пройдена, у лошади не хватило сил");
             return false;
         }
     }

@@ -1,11 +1,13 @@
 package ru.otus.java.basic.dz1.homework7;
 
 public class Bicycle implements Movement {
-    private Terrain[] impassable = {Terrain.SWAMP};
+    private static Terrain[] impassable = {Terrain.SWAMP};
 
     public boolean choosingLocation(Terrain terrain) {
         for (int i = 0; i < impassable.length; i++) {
-            return false;
+            if (impassable[i].equals(terrain)) {
+                return false;
+            }
         }
         return true;
     }
