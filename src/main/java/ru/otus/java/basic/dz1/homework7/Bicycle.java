@@ -3,7 +3,7 @@ package ru.otus.java.basic.dz1.homework7;
 public class Bicycle implements Movement {
     private static Terrain[] impassable = {Terrain.SWAMP};
 
-    public boolean choosingLocation(Terrain terrain) {
+    public boolean isLocationPassable(Terrain terrain) {
         for (int i = 0; i < impassable.length; i++) {
             if (impassable[i].equals(terrain)) {
                 return false;
@@ -14,7 +14,7 @@ public class Bicycle implements Movement {
 
     @Override
     public boolean move(int distance, Terrain terrain) {
-        if (choosingLocation(terrain)) {
+        if (isLocationPassable(terrain)) {
             System.out.println("Дистанция пройдена");
             return true;
         } else {

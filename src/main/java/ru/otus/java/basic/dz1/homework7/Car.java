@@ -10,7 +10,7 @@ public class Car implements Movement {
         this.wastePatrol = wastePatrol;
     }
 
-    public boolean choosingLocation(Terrain terrain) {
+    public boolean isLocationPassable(Terrain terrain) {
         for (int i = 0; i < impassable.length; i++) {
             if (impassable[i].equals(terrain)) {
                 return false;
@@ -21,13 +21,14 @@ public class Car implements Movement {
 
     @Override
     public boolean move(int distance, Terrain terrain) {
-        if (choosingLocation(terrain)) {
+        if (isLocationPassable(terrain)) {
             System.out.println("Дистанция не пройдена, автомобиль не может пройти по данной местности");
             return false;
         }
         if (distance < patrol / wastePatrol) {
-            patrol = distance * wastePatrol;
-            System.out.println("Дистанция пройдена и на нее затрачено " + patrol + " единиц топлива");
+            patrol -= distance * wastePatrol;
+            System.out.println("Дистанция пройдена и на нее затрачено " + distance * wastePatrol + " единиц топлива");
+            System.out.println("Топлива осталось: " + patrol + " единиц");
             return true;
         } else {
             System.out.println("Дистанция не пройдена");

@@ -10,7 +10,7 @@ public class Horse implements Movement {
         this.wastePower = wastePower;
     }
 
-    public boolean choosingLocation(Terrain terrain) {
+    public boolean isLocationPassable(Terrain terrain) {
         for (int i = 0; i < impassable.length; i++) {
             if (impassable[i].equals(terrain)) {
                 return false;
@@ -21,13 +21,14 @@ public class Horse implements Movement {
 
     @Override
     public boolean move(int distance, Terrain terrain) {
-        if (choosingLocation(terrain)) {
+        if (isLocationPassable(terrain)) {
             System.out.println("Дистанция не пройдена, лошадь не может пройти по данной местности");
             return false;
         }
         if (distance < power / wastePower) {
-            power = distance * wastePower;
-            System.out.println("Дистанция пройдена. Лошадь потратила " + power + " единиц своих сил");
+            power -= distance * wastePower;
+            System.out.println("Дистанция пройдена. Лошадь потратила " + distance * wastePower + " единиц своих сил");
+            System.out.println("Сил осталось: " + power + " единиц");
             return true;
         } else {
             System.out.println("Дистанция не пройдена, у лошади не хватило сил");
