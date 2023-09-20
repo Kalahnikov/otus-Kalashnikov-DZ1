@@ -2,7 +2,7 @@ package ru.otus.java.basic.dz1;
 
 import java.util.Scanner;
 
-public class MainApp {
+public class MainMap {
     public static void main(String[] args) {
         scannCase();
         greetings();
