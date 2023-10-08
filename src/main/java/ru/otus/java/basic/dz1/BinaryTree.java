@@ -3,15 +3,15 @@ package ru.otus.java.basic.dz1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinaryTree implements SearchTree {
-    Node root;
+public class BinaryTree<T> implements SearchTree {
+    private Node root;
 
-    public BinaryTree(ArrayList<Integer> list) {
-        this.root = sorted(list);
+    public BinaryTree(List<Integer> list) {
+        this.root = sorted((ArrayList<Integer>) list);
     }
 
-    public static Node sorted(ArrayList<Integer> list) {
-        if (list.size() == 0) {
+    public static Node<Integer> sorted(ArrayList<Integer> list) {
+        if (list.isEmpty()) {
             return null;
         }
         return tree(list, 0, list.size() - 1);
@@ -33,7 +33,7 @@ public class BinaryTree implements SearchTree {
         return node;
     }
 
-    public static ArrayList getSortedList(ArrayList<Integer> list) {
+    public ArrayList getSortedList(ArrayList<Integer> list) {
         return list;
     }
 
@@ -42,7 +42,9 @@ public class BinaryTree implements SearchTree {
     }
 
     private boolean find(Node node, int element) {
-
+        if (node == null) {
+            return false;
+        }
         if (node.value == element) {
             return true;
         } else if (find(node.left, element)) {
