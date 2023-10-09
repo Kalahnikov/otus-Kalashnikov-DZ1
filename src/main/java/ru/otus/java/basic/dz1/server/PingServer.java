@@ -2,9 +2,7 @@ package ru.otus.java.basic.dz1.server;
 
 import ru.otus.java.basic.dz1.client.PingClient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,9 +14,9 @@ public class PingServer {
         while (true) {
             Socket socket = serverSocket.accept();
             System.out.println("Client connected");
-
-            byte[] res = calculate(readRequest(socket)).getBytes();
-
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            out.write("Введите два числа и одну из доступных мат. операций: +, -, *, /." + "\n");
+            byte[] res = calculate(socket).getBytes();
             try (socket) {
                 PingClient pingClient = new PingClient(socket.getInputStream(), socket.getOutputStream());
                 pingClient.ping(res);
@@ -34,29 +32,32 @@ public class PingServer {
     private static String readRequest(Socket socket) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String str;
-        while (true) {
-            str = reader.readLine() + " ";
-            if (str == null || str.trim().isEmpty()) {
-                break;
-            }
-        }
+
+        str = reader.readLine();
+
         return str;
     }
-    private static String calculate(String str){
+
+    private static String calculate(Socket socket) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String str;
+
+        str = reader.readLine();
         int calculate = 0;
-        String [] splitstr = str.split(" ", 2);
-        switch (splitstr[2]){
+        String[] splitter;
+        splitter = str.split(" ");
+        switch (splitter[2]) {
             case "+":
-                calculate = Integer.parseInt(splitstr[0]) + Integer.parseInt(splitstr[1]);
+                calculate = Integer.parseInt(splitter[0]) + Integer.parseInt(splitter[1]);
                 break;
             case "-":
-                calculate = Integer.parseInt(splitstr[0]) - Integer.parseInt(splitstr[1]);
+                calculate = Integer.parseInt(splitter[0]) - Integer.parseInt(splitter[1]);
                 break;
             case "*":
-                calculate = Integer.parseInt(splitstr[0]) * Integer.parseInt(splitstr[1]);
+                calculate = Integer.parseInt(splitter[0]) * Integer.parseInt(splitter[1]);
                 break;
             case "/":
-                calculate = Integer.parseInt(splitstr[0]) / Integer.parseInt(splitstr[1]);
+                calculate = Integer.parseInt(splitter[0]) / Integer.parseInt(splitter[1]);
                 break;
             default:
                 break;
@@ -64,4 +65,5 @@ public class PingServer {
 
         return Integer.toString(calculate);
     }
+
 }

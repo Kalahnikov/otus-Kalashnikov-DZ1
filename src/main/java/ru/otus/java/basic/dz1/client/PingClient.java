@@ -15,6 +15,9 @@ public class PingClient implements AutoCloseable {
         out.write(bytes);
         out.flush();
     }
+    public void pingIn() throws IOException {
+        in.readByte();
+    }
 
     @Override
     public void close() throws Exception {
