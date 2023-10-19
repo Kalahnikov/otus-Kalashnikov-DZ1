@@ -1,8 +1,6 @@
 package ru.otus.java.basic.dz1.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -10,34 +8,26 @@ import java.util.Scanner;
 
 public class MainSocket {
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("localhost", 8087);
         Scanner scanner = new Scanner(System.in);
-
-        String operation = scanner.nextLine();
-
-        byte[] bytesOperation = operation.getBytes();
-
-
-        try (socket) {
-            PingClient pingClient = new PingClient(socket.getInputStream(), socket.getOutputStream());
-            pingClient.ping(bytesOperation);
-            read(socket);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        try (
+                Socket socket = new Socket("localhost", 8087);
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream())
+        ) {
+            System.out.println(in.readUTF());
+            System.out.println(in.readUTF());
+            float a = scanner.nextFloat();
+            out.writeFloat(a);
+            System.out.println(in.readUTF());
+            float b = scanner.nextFloat();
+            out.writeFloat(b);
+            System.out.println(in.readUTF());
+            String operation = scanner.next();
+            out.writeUTF(operation);
+            System.out.println(in.readUTF());
         }
-
-
     }
-
-    private static void read(Socket socket) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String str = reader.readLine();
-        System.out.println(str);
-
-    }
-
 }
+
+
+
